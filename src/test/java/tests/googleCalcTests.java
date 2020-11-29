@@ -70,10 +70,39 @@ public class googleCalcTests {
         CalcGooglePage.equally.click();
 
         assertAll(
-                () -> assertEquals("(1 + 2) × 3 - 40 ÷ 5 =",driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
-                () -> assertEquals("1",driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText())
+                () -> assertEquals("(1 + 2) × 3 - 40 ÷ 5 =", driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
+                () -> assertEquals("1", driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText())
         );
 
+
+    }
+
+    @Test
+    @DisplayName("Проверка деления на 0")
+    public void test2() {
+        CalcGooglePage.search("Калькулятор");
+        CalcGooglePage.six.click();
+        CalcGooglePage.division.click();
+        CalcGooglePage.zero.click();
+        CalcGooglePage.equally.click();
+        assertAll(
+                () -> assertEquals("6 ÷ 0 =", driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
+                () -> assertEquals("Infinity", driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText())
+        );
+
+
+    }
+
+    @Test
+    @DisplayName("Проверка ответа при пустом синусе")
+    public void test3() {
+        CalcGooglePage.search("Калькулятор");
+        CalcGooglePage.sin.click();
+        CalcGooglePage.equally.click();
+        assertAll(
+                () -> assertEquals("sin() =", driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
+                () -> assertEquals("Error", driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText())
+        );
 
 
     }

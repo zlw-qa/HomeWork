@@ -32,33 +32,48 @@ public class googleCalcTests {
 
     }
 
+    @BeforeEach
+    public void setup() {
+
+        driver.get("https://www.google.ru/");
+    }
 
     @Test
+    @DisplayName("Проверка выражения и его результата")
     public void test1() {
-        driver.get("https://www.google.ru/");
         CalcGooglePage.search("Калькулятор");
-
+        //(
         CalcGooglePage.openBracket.click();
         //1
         CalcGooglePage.one.click();
+        //+
         CalcGooglePage.plus.click();
         //2
         CalcGooglePage.two.click();
+        //)
         CalcGooglePage.closingBracket.click();
+        //*
         CalcGooglePage.multiply.click();
         //3
         CalcGooglePage.three.click();
+        //-
         CalcGooglePage.minus.click();
         //4
         CalcGooglePage.four.click();
         //0
         CalcGooglePage.zero.click();
+        //:
         CalcGooglePage.division.click();
         //5
         CalcGooglePage.five.click();
+        //=
         CalcGooglePage.equally.click();
-        assertEquals("(1 + 2) × 3 - 40 ÷ 5 =",driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText());
-        assertEquals("1",driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText());
+
+        assertAll(
+                () -> assertEquals("(1 + 2) × 3 - 40 ÷ 5 =",driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
+                () -> assertEquals("1",driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText())
+        );
+
 
 
     }

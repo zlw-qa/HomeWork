@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeOptions;
+import page.CalcGooglePage;
 
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class googleCalcTests {
 
     private static WebDriver driver;
+    private static CalcGooglePage CalcGooglePage;
 
     @BeforeAll
     public static void init() {
@@ -26,33 +28,35 @@ public class googleCalcTests {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
+        CalcGooglePage = new CalcGooglePage(driver);
+
     }
 
 
     @Test
     public void test1() {
         driver.get("https://www.google.ru/");
-        driver.findElement(By.cssSelector("input.gLFyf.gsfi")).sendKeys("Калькулятор", Keys.ENTER);
+        CalcGooglePage.search("Калькулятор");
 
-        driver.findElement(By.cssSelector("div[aria-label=\"открывающая скобка\"]")).click();
+        CalcGooglePage.openBracket.click();
         //1
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"N10B9\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"сложение\"]")).click();
+        CalcGooglePage.one.click();
+        CalcGooglePage.plus.click();
         //2
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"lVjWed\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"закрывающая скобка\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"умножение\"]")).click();
+        CalcGooglePage.two.click();
+        CalcGooglePage.closingBracket.click();
+        CalcGooglePage.multiply.click();
         //3
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"KN1kY\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"вычитание\"]")).click();
+        CalcGooglePage.three.click();
+        CalcGooglePage.minus.click();
         //4
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"xAP7E\"]")).click();
+        CalcGooglePage.four.click();
         //0
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"bkEvMb\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"деление\"]")).click();
+        CalcGooglePage.zero.click();
+        CalcGooglePage.division.click();
         //5
-        driver.findElement(By.cssSelector("div [class=\"PaQdxb A2W7l\"] [jsname=\"Ax5wH\"]")).click();
-        driver.findElement(By.cssSelector("div[aria-label=\"равно\"]")).click();
+        CalcGooglePage.five.click();
+        CalcGooglePage.equally.click();
         assertEquals("(1 + 2) × 3 - 40 ÷ 5 =",driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText());
         assertEquals("1",driver.findElement(By.cssSelector("div [jsname=\"zLiRgc\"] span")).getText());
 

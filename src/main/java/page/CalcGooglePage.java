@@ -1,16 +1,25 @@
 package page;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 public class CalcGooglePage {
 
+    @FindBy(css = "div [jsname=\"VkJw6\"] span")
+    public List<WebElement> checkInput;
+
+    @FindBy(css = "div [jsname=\"zLiRgc\"] span")
+    public List<WebElement> checkResult;
+
     @FindBy(css = "input.gLFyf.gsfi")
-    public WebElement searchInput;
+    private WebElement searchInput;
 
     @FindBy(css = "div[aria-label=\"открывающая скобка\"]")
     public WebElement openBracket;
@@ -33,7 +42,10 @@ public class CalcGooglePage {
     @FindBy(css = "div[aria-label=\"равно\"]")
     public WebElement equally;
 
-    @FindBy(css = "div [class=\"PaQdxb A2W7l\"")
+    @FindBy(css = "div [class=\"PaQdxb A2W7l\"] [jsname=\"bkEvMb\"]")
+    public WebElement zero;
+
+    @FindBy(css = "div [class=\"PaQdxb A2W7l\"] [jsname=\"N10B9\"]")
     public WebElement one;
 
     @FindBy(css = "div [class=\"PaQdxb A2W7l\"] [jsname=\"lVjWed\"]")
@@ -58,6 +70,11 @@ public class CalcGooglePage {
     public CalcGooglePage(WebDriver driver) {
         initElements(driver,     this);
     }
+
+    public void search(String text) {
+        searchInput.sendKeys(text, Keys.ENTER);
+    }
+
 }
 //        driver.findElement(By.cssSelector("div[aria-label=\"открывающая скобка\"]")).click();
 //                driver.findElement(By.cssSelector("div[aria-label=\"синус\"]")).click();

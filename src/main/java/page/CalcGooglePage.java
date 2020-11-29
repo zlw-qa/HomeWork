@@ -1,6 +1,7 @@
 package page;
 
 public class CalcGooglePage {
+
 }
 //        driver.findElement(By.cssSelector("div[aria-label=\"открывающая скобка\"]")).click();
 //                driver.findElement(By.cssSelector("div[aria-label=\"синус\"]")).click();

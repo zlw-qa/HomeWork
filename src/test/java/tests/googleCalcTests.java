@@ -35,7 +35,7 @@ public class googleCalcTests {
     }
 
     @Test
-    @DisplayName("Проверка выражения и его результата")
+    @DisplayName("Кейс 1. Проверка операций с целыми числами")
     public void test1() {
         CalcGooglePage.search("Калькулятор");
         //(
@@ -74,12 +74,16 @@ public class googleCalcTests {
     }
 
     @Test
-    @DisplayName("Проверка деления на 0")
+    @DisplayName("Кейс 2. Проверка деления на ноль")
     public void test2() {
         CalcGooglePage.search("Калькулятор");
+        //6
         CalcGooglePage.six.click();
+        //:
         CalcGooglePage.division.click();
+        //0
         CalcGooglePage.zero.click();
+        //=
         CalcGooglePage.equally.click();
         assertAll(
                 () -> assertEquals("6 ÷ 0 =", driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),
@@ -90,10 +94,12 @@ public class googleCalcTests {
     }
 
     @Test
-    @DisplayName("Проверка ответа при пустом синусе")
+    @DisplayName("Кейс 3. Проверка ошибки при отсутствии значения")
     public void test3() {
         CalcGooglePage.search("Калькулятор");
+        //sin()
         CalcGooglePage.sin.click();
+        //=
         CalcGooglePage.equally.click();
         assertAll(
                 () -> assertEquals("sin() =", driver.findElement(By.cssSelector("div [jsname=\"VkJw6\"] span")).getText()),

@@ -68,7 +68,7 @@ public class CalcGooglePage {
 
 
     public CalcGooglePage(WebDriver driver) {
-        initElements(driver,     this);
+        initElements(driver, this);
     }
 
     public void search(String text) {
